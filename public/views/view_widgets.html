@@ -1,0 +1,52 @@
+<div class="row" id="widgetController" ng-controller="DashboardController as dashboardCtrl" ng-init="dashboardCtrl.viewAllWidgets()">
+  <div class="col-md-12 col-sm-12 col-xs-12" ng-show="!widgets || widgets.length == 0">
+    <div class="dashboard_no_widgets">
+      <i class="fa fa-exclamation-circle fa-5x fa-fw"></i>
+      <h3>No Widgets!</h3>
+    </div>
+  </div>
+  <div ng-show"widgets" ng-repeat="widget in widgets">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <a href="#widget/{{widget._id}}"><h2>{{ widget.name }}</h2></a>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link" ng-click="mainCtrl.collapse($event)"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li>
+              <a href="#widget/{{widget._id}}"><i class="fa fa-wrench"></i></a>
+            </li>
+            <li>
+              <a class="close-link" ng-click="dashboardCtrl.deleteWidget(widget._id)"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <div ng-show="widget.loading || widget.error" style="text-align: center;">
+            <br>
+            <i ng-show="widget.loading" class="fa fa-refresh fa-spin fa-5x fa-fw"></i>
+            <i ng-show="widget.error" class="fa fa-exclamation-circle fa-5x fa-fw"></i>
+            <div ng-show"widget.error">
+              {{widget.error}}
+              <br>
+            </div>
+            <br>
+          </div>
+          <div ng-show="widget.graphType == 'count' && !widget.loading && !widget.error" class="tile_count">
+            <div class="tile_stats_count">
+              <span class="count-top">Field Path: {{widget.fieldPath.join(".")}}</span>
+              <div class="count">{{widget.data}}</div>
+              <h3 class="count-bottom">Value: <span class="value">{{widget.value}}</span></h3>
+            </div>
+          </div>
+          <div ng-show="widget.graphType != 'count' && !widget.loading && !widget.error" class="chartSize">
+            <canvas id="{{ widget._id }}" class="chart chart-base" 
+                chart-type="widget.graphType" chart-options="widget.options" chart-data="widget.data" chart-labels="widget.labels">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

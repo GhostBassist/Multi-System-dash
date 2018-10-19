@@ -1,0 +1,121 @@
+<div class="row" id="systemController" ng-controller="SystemController as systemCtrl" ng-init="systemCtrl.setupCreatePage()">			
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Create System</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+
+        <form class="form-horizontal form-label-left" id="systemForm" name="systemForm" ng-submit="systemCtrl.createSystem()" role="form" novalidate>
+
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="created-by">Created By <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="text" ng-model="system.createdBy.forename" id="created-by" name="created-by" required="required" readonly="readonly" class="form-control col-md-7 col-xs-12">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="created-date">Created Date <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="text" ng-model="system.createdDate" id="created-date" name="created-date" required="required" readonly="readonly" class="form-control col-md-7 col-xs-12">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="systemName">System Name <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="text" ng-model="system.name" id="systemName" name="systemName" class="form-control col-md-7 col-xs-12" 
+                ng-class="{' inputError': systemForm.systemName.$invalid && !systemForm.systemName.$pristine }" maxlength="50" ng-maxlength="50" required>
+              <p ng-show="systemForm.systemName.$invalid && !systemForm.systemName.$pristine && !systemForm.systemName.$error.maxlength" class="has-error" >
+                A system name is required.
+              </p>
+              <p ng-show="systemForm.systemName.$error.maxlength" class="has-error" >
+                The system name must not exceed 50 characters.
+              </p>
+            </div>    
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contactEmail">Contact Email <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="email" ng-model="system.contact" id="contactEmail" name="contactEmail" class="form-control col-md-7 col-xs-12"
+              ng-class="{' inputError': systemForm.contactEmail.$invalid && !systemForm.contactEmail.$pristine }" required>
+              <p ng-show="systemForm.contactEmail.$invalid && !systemForm.contactEmail.$pristine" class="has-error" >
+                Enter a valid email.
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="url" class="control-label col-md-3 col-sm-3 col-xs-12">URL<span class="required">*</span>
+              <br>
+              <small>
+                Must start with 'http://'
+              </small>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="url" ng-model="system.url" id="url" name="url" class="form-control col-md-7 col-xs-12"
+              ng-class="{' inputError': systemForm.url.$invalid && !systemForm.url.$pristine }" required>
+              <p ng-show="systemForm.url.$invalid && !systemForm.url.$pristine" class="has-error" >
+                Enter a valid URL.
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="status" class="control-label col-md-3 col-sm-3 col-xs-12">Status<span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input
+                bs-switch
+                ng-model="system.status"
+                type="checkbox"
+                value="online"
+                ng-value="offline"
+                switch-active="true"
+                switch-on-text="Online"
+                switch-off-text="Offline"
+                switch-on-color="primary"
+                switch-off-color="danger"
+                ng-true-value="'online'"
+                ng-false-value="'offline'"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">Description
+              <br>
+              <small>
+                Max 255 characters
+              </small>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <textarea ng-model="system.description" class="form-control" name="description" id="description" rows="3" maxlength="255"
+                ng-class="{' inputError': systemForm.description.$invalid && !systemForm.description.$pristine }"></textarea>
+              <p ng-show="systemForm.description.$invalid && !systemForm.description.$pristine && !systemForm.description.$error.maxlength" class="has-error" >
+                Please enter description that is less than 255 characters
+              </p>
+            </div>
+          </div>
+
+          <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <button type="submit" class="btn btn-success" ng-disabled="systemForm.$pristine || systemForm.$invalid">Submit</button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

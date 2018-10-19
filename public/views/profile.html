@@ -1,0 +1,60 @@
+<div class="row" ng-controller="UserController as userCtrl" ng-init="userCtrl.initProfile()">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+        <div class="col-md-4 col-sm-4 col-xs-12 details_left">
+            <img class="img-responsive profile_img" ng-src="api/user/image/{{user.image}}" alt="Profile Picture"/>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12">
+
+          <ul class="stats-overview">
+            <li>
+              <span class="name"> Systems Created </span>
+              <span class="value text-success"> {{userCtrl.userStats.system}} </span>
+            </li>
+            <li>
+              <span class="name"> Endpoints Created </span>
+              <span class="value text-success"> {{userCtrl.userStats.endpoint}} </span>
+            </li>
+            <li class="hidden-phone">
+              <span class="name"> Widgets Created </span>
+              <span class="value text-success"> {{userCtrl.userStats.widget}} </span>
+            </li>
+          </ul>
+
+          <h3>{{user.forename}} {{user.surname}}</h3>
+          <ul class="list-unstyled entity_details">
+            <li>
+              <i class="fa fa-calendar-check-o"></i> Created: {{user.createdDate}}
+            </li>
+            <li>
+              <i class="fa fa-envelope-o" uib-tooltip="Email"></i> Email: {{user.email}}
+            </li>
+            <li ng-show="!edit && user.location">
+              <i class="fa fa-map-marker" uib-tooltip="Location"></i> Location: {{user.location}}
+            </li>
+            <li ng-show="edit">
+              <i class="fa fa-map-marker"></i> Location: <input class="form-control" type="text" ng-model="user.location" style="width:65%">
+            </li>
+            <li ng-show="!edit && user.company">
+              <i class="fa fa-briefcase" uib-tooltip="Company"></i> Company: {{user.company}}
+            </li>
+            <li ng-show="edit">
+              <i class="fa fa-briefcase"></i> Company: <input class="form-control" type="text" ng-model="user.company" style="width:65%">
+            </li>
+            <li ng-show="!edit && user.website">
+              <i class="fa fa-external-link" uib-tooltip="Website"></i> Website: {{user.website}}
+            </li>
+            <li ng-show="edit">
+              <i class="fa fa-external-link"></i> Website: <input class="form-control" type="text" ng-model="user.website" style="width:65%">
+            </li>
+          </ul>
+          <br>
+          <br>
+          <a class="btn btn-success" ng-show="!edit" ng-click="userCtrl.toggleEdit()"><i class="fa fa-edit m-right-xs"></i> Edit Profile</a>
+          <a class="btn btn-success" ng-show="edit" ng-click="userCtrl.saveUser()"><i class="fa fa-edit m-right-xs"></i> Update Profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

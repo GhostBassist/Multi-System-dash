@@ -1,0 +1,43 @@
+<div class="row" ng-controller="SystemController as systemCtrl">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>View Systems</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content" ng-init="systemCtrl.getSystems()">
+        <div ng-hide="systems && systems.length > 0" class="dashboard_no_widgets">
+          <i class="fa fa-exclamation-circle fa-5x fa-fw"></i>
+          <h3>No Systems!</h3>
+        </div>
+        <table id="datatable" class="table table-striped table-bordered" ng-show="systems && systems.length > 0">
+          <thead>
+            <tr>
+              <th>System Name</th>
+              <th>Contact Email</th>
+              <th>Number of Endpoints</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="system in systems">
+              <td>{{system.name}}
+              <br />
+              <small>Created {{system.createdDate}}</small>
+              </td>
+              <td>{{system.contact}}</td>
+              <td>{{system.numEndpoints}}</td>
+              <td><button type="button" class="btn btn-xs" ng-class="{ 'btn-success' : system.status == 'online', 'btn-danger' : system.status == 'offline'}" >{{system.status}}</button></td>
+              <td>
+                <a href="#system/{{system._id}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> View </a>
+                <a ng-click="systemCtrl.deleteSystemFromViewAll(system._id)" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+              </td>
+            </tr>        
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
